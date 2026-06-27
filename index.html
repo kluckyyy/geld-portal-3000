@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>★彡 GELD GELD GELD ★彡 KLICK HIER !!1!</title>
+<style>
+  :root { --neon:#39ff14; --hot:#ff00ff; --gold:#ffd700; }
+
+  html,body{ margin:0; padding:0; overflow-x:hidden; }
+
+  body{
+    font-family:"Comic Sans MS","Comic Sans",cursive,sans-serif;
+    background:
+      repeating-linear-gradient(45deg,#000 0 20px,#111 20px 40px);
+    color:#fff;
+    text-align:center;
+    cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ctext y='30' font-size='30'%3E%F0%9F%92%B0%3C/text%3E%3C/svg%3E") 16 16, auto;
+  }
+
+  /* Regenbogen-Lauflicht-Rahmen */
+  .rainbow-border{
+    border:12px solid;
+    border-image:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet) 1;
+    animation:huerot 2s linear infinite;
+  }
+  @keyframes huerot{ from{filter:hue-rotate(0)} to{filter:hue-rotate(360deg)} }
+
+  /* Wackel-Animation */
+  @keyframes wackel{
+    0%{transform:rotate(-6deg) scale(1)}
+    25%{transform:rotate(6deg) scale(1.1)}
+    50%{transform:rotate(-6deg) scale(1)}
+    75%{transform:rotate(6deg) scale(1.1)}
+    100%{transform:rotate(-6deg) scale(1)}
+  }
+  .wackel{ display:inline-block; animation:wackel .4s ease-in-out infinite; }
+
+  /* Heftiges Blinken */
+  @keyframes blink{ 0%,49%{opacity:1} 50%,100%{opacity:0} }
+  .blink{ animation:blink .6s steps(1) infinite; }
+
+  /* Regenbogen-Text */
+  @keyframes rainbowtext{ to{ background-position:200% center; } }
+  .rainbowtext{
+    background:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet,red);
+    background-size:200% auto;
+    -webkit-background-clip:text; background-clip:text;
+    color:transparent;
+    animation:rainbowtext 2s linear infinite;
+  }
+
+  /* Lauf-Marquee */
+  .marquee{
+    white-space:nowrap; overflow:hidden; background:#000; border-top:3px dashed var(--neon); border-bottom:3px dashed var(--neon);
+    font-size:1.6rem; font-weight:bold; padding:6px 0;
+  }
+  .marquee span{ display:inline-block; padding-left:100%; animation:scrollx 12s linear infinite; color:var(--gold); }
+  @keyframes scrollx{ to{ transform:translateX(-100%); } }
+
+  /* Pulsierende Pfeile */
+  @keyframes pulse{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.6)} }
+  .pfeil{ font-size:3rem; display:inline-block; animation:pulse .5s ease-in-out infinite; }
+
+  /* Der MEGA-Button */
+  .megabtn{
+    font-family:inherit; font-size:2.4rem; font-weight:900;
+    padding:24px 50px; margin:20px;
+    background:linear-gradient(180deg,#ffec00,#ff8a00);
+    color:#b00; border:6px ridge var(--gold); border-radius:18px;
+    text-shadow:2px 2px 0 #fff; box-shadow:0 0 30px var(--gold);
+    cursor:pointer; animation:wackel .5s ease-in-out infinite;
+  }
+  .megabtn:hover{ animation:wackel .12s ease-in-out infinite; }
+
+  /* Zentrale Bühne */
+  .stage{
+    margin:30px auto; max-width:760px; padding:30px;
+    background:radial-gradient(circle,#1a0033,#000); position:relative; z-index:2;
+  }
+  .titel{ font-size:clamp(2.4rem,7vw,5rem); font-weight:900; line-height:1.1; text-shadow:3px 3px 0 var(--hot),6px 6px 0 #000; }
+
+  /* Eingabefeld (rein dekorativ-albern) */
+  .konto-input{
+    font-family:inherit; font-size:1.4rem; padding:14px; width:80%;
+    border:5px dashed var(--neon); border-radius:10px; text-align:center;
+    background:#000; color:var(--neon);
+  }
+
+  /* fallende Dollar */
+  .dollar{ position:fixed; top:-50px; font-size:2rem; z-index:1; pointer-events:none; user-select:none; }
+  @keyframes fall{ to{ transform:translateY(110vh) rotate(720deg); } }
+
+  /* Fake-Banner oben */
+  .topbanner{ background:#ff0000; color:#fff; font-size:1.3rem; font-weight:bold; padding:8px; }
+
+  /* Besucherzähler-Box */
+  .counter{ display:inline-block; background:#000; border:3px solid var(--neon); padding:6px 14px; font-family:"Courier New",monospace; font-size:1.4rem; color:var(--neon); letter-spacing:4px; }
+
+  .glitter{ animation:blink .3s steps(1) infinite; font-size:2rem; }
+
+  footer{ padding:30px; font-size:.8rem; color:#888; }
+  a.fake{ color:var(--gold); text-decoration:underline; }
+</style>
+</head>
+<body>
+
+  <div class="topbanner blink">🚨 ACHTUNG !!! DU BIST DER <span id="winnernr">1.000.000</span>. BESUCHER 🚨 KLICK SCHNELL BEVOR ES WEG IST 🚨</div>
+
+  <div class="marquee"><span>💸💸💸 GRATIS GELD 💸💸💸 KEINE HAKEN 💸 NUR HEUTE 💸 OMA HASST DIESEN TRICK 💸 BANKEN SIND SAUER 💸💸💸 GIB EINFACH DEINE KONTONUMMER 💸 WAS KANN SCHON SCHIEFGEHEN 💸💸💸</span></div>
+
+  <h1 class="rainbowtext wackel" style="font-size:3rem;margin-top:20px;">★彡 GELD-PORTAL 3000 彡★</h1>
+
+  <div style="font-size:2rem;">
+    <span class="glitter">✨</span>
+    <span class="counter" id="geldzaehler">€ 00000000</span>
+    <span class="glitter">✨</span>
+  </div>
+
+  <div class="stage rainbow-border">
+
+    <div>
+      <span class="pfeil" style="color:var(--neon)">👉</span>
+      <span class="pfeil blink" style="color:var(--hot)">👉</span>
+      <span class="pfeil" style="color:var(--gold)">👉</span>
+    </div>
+
+    <div class="titel rainbowtext">Gib mal Kontonummer</div>
+
+    <p class="blink" style="font-size:1.6rem;color:var(--gold)">💰💰💰 dann passiert was TOLLES 💰💰💰</p>
+
+    <input class="konto-input" id="kontofeld" placeholder="DE.. .. .. (voll seriös)" autocomplete="off">
+
+    <div>
+      <span class="pfeil" style="color:var(--gold)">👆</span>
+      <span class="pfeil blink" style="color:var(--neon)">👆</span>
+      <span class="pfeil" style="color:var(--hot)">👆</span>
+    </div>
+
+    <button class="megabtn" onclick="kassieren()">💵 JA ICH WILL REICH WERDEN 💵</button>
+
+    <p style="font-size:.9rem;color:#aaa">⭐⭐⭐⭐⭐ von 9999 echten Leuten™ empfohlen</p>
+  </div>
+
+  <div style="margin:20px;">
+    <span class="wackel" style="font-size:3rem;">🤑</span>
+    <span class="wackel blink" style="font-size:3rem;">🪙</span>
+    <span class="wackel" style="font-size:3rem;">💎</span>
+    <span class="wackel blink" style="font-size:3rem;">🏆</span>
+    <span class="wackel" style="font-size:3rem;">🤑</span>
+  </div>
+
+  <footer>
+    🛑 Das hier ist ein <b>Spaß</b>. Niemals echte Kontodaten irgendwo eingeben, wo es so aussieht. 🛑<br>
+    <a class="fake" href="javascript:void(0)" onclick="alert('Hähä, genau DAS würde ein echter Betrüger auch sagen. 😏')">Hier klicken für noch mehr Geld</a>
+  </footer>
+
+<script>
+  // Fallende Dollarzeichen
+  const symbole = ['💵','💰','🤑','💸','🪙','💲','€'];
+  function regne(){
+    const d = document.createElement('div');
+    d.className = 'dollar';
+    d.textContent = symbole[Math.floor(Math.random()*symbole.length)];
+    d.style.left = Math.random()*100 + 'vw';
+    const dur = 3 + Math.random()*4;
+    d.style.animation = `fall ${dur}s linear forwards`;
+    d.style.fontSize = (1.2 + Math.random()*2) + 'rem';
+    document.body.appendChild(d);
+    setTimeout(()=>d.remove(), dur*1000);
+  }
+  setInterval(regne, 180);
+
+  // Geldzähler der hochrast
+  let geld = 0;
+  setInterval(()=>{
+    geld += Math.floor(Math.random()*9999);
+    document.getElementById('geldzaehler').textContent =
+      '€ ' + String(geld).padStart(8,'0');
+  }, 90);
+
+  // Besucher-Nummer wackelt
+  setInterval(()=>{
+    document.getElementById('winnernr').textContent =
+      (999990 + Math.floor(Math.random()*20)).toLocaleString('de-DE');
+  }, 700);
+
+  // Der Button macht NICHTS Echtes — nur Quatsch
+  const sprueche = [
+    'GLÜCKWUNSCH! Du gewinnst... gar nichts. 🎉 War nur Spaß!',
+    'Lädt dein Geld... 0%... 0%... 0%... ach komm, behalt deine Kontonummer. 😂',
+    'FEHLER 404: Reichtum nicht gefunden. Aber du bist trotzdem super! 💖',
+    'Deine Kontonummer wurde NICHT gespeichert, weil das hier nur ein Gag ist. 🤓',
+    'Achtung: echtes Geld gibt es nur durch Arbeit, Oma hatte recht. 👵'
+  ];
+  function kassieren(){
+    const feld = document.getElementById('kontofeld');
+    feld.value = '';
+    feld.placeholder = sprueche[Math.floor(Math.random()*sprueche.length)];
+    // Konfetti-Burst aus Emojis
+    for(let i=0;i<40;i++) setTimeout(regne, i*20);
+    document.body.animate(
+      [{filter:'hue-rotate(0)'},{filter:'hue-rotate(360deg)'}],
+      {duration:600, iterations:2}
+    );
+  }
+</script>
+</body>
+</html>
