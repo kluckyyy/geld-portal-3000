@@ -101,6 +101,16 @@
 
   footer{ padding:30px; font-size:.8rem; color:#888; }
   a.fake{ color:var(--gold); text-decoration:underline; }
+
+  /* Ergebnis-Box: zeigt die Sprueche vollstaendig & umgebrochen */
+  .ergebnis-box{
+    display:none; margin:18px auto 0; max-width:90%;
+    background:#000; border:5px dashed var(--gold); border-radius:12px;
+    padding:18px 20px; color:var(--neon); font-size:1.4rem; font-weight:bold;
+    line-height:1.4; white-space:normal; overflow-wrap:break-word; word-break:break-word;
+    box-shadow:0 0 25px var(--gold);
+  }
+  .ergebnis-box.show{ display:block; animation:wackel .4s ease-in-out 2; }
 </style>
 </head>
 <body>
@@ -130,6 +140,8 @@
     <p class="blink" style="font-size:1.6rem;color:var(--gold)">💰💰💰 dann passiert was TOLLES 💰💰💰</p>
 
     <input class="konto-input" id="kontofeld" placeholder="DE.. .. .. (voll seriös)" autocomplete="off">
+
+    <div id="ergebnis" class="ergebnis-box"></div>
 
     <div>
       <span class="pfeil" style="color:var(--gold)">👆</span>
@@ -196,7 +208,11 @@
   function kassieren(){
     const feld = document.getElementById('kontofeld');
     feld.value = '';
-    feld.placeholder = sprueche[Math.floor(Math.random()*sprueche.length)];
+    feld.placeholder = 'DE.. .. .. (voll seriös)';
+    // Spruch in der lesbaren Box anzeigen (vollstaendig, mit Umbruch)
+    const box = document.getElementById('ergebnis');
+    box.textContent = sprueche[Math.floor(Math.random()*sprueche.length)];
+    box.classList.add('show');
     // Konfetti-Burst aus Emojis
     for(let i=0;i<40;i++) setTimeout(regne, i*20);
     document.body.animate(
