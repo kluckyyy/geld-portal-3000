@@ -115,6 +115,13 @@
 </head>
 <body>
 
+  <button id="musikbtn" onclick="toggleMusic()"
+    style="position:fixed;top:10px;right:10px;z-index:99;font-family:inherit;font-weight:900;
+    font-size:1.1rem;padding:10px 16px;border:4px ridge gold;border-radius:12px;cursor:pointer;
+    background:linear-gradient(180deg,#ffec00,#ff8a00);color:#b00;box-shadow:0 0 18px gold;animation:wackel .6s ease-in-out infinite;">
+    🎵 MUSIK AN!
+  </button>
+
   <div class="topbanner blink">🚨 ACHTUNG !!! DU BIST DER <span id="winnernr">1.000.000</span>. BESUCHER 🚨 KLICK SCHNELL BEVOR ES WEG IST 🚨</div>
 
   <div class="marquee"><span>💸💸💸 GRATIS GELD 💸💸💸 KEINE HAKEN 💸 NUR HEUTE 💸 OMA HASST DIESEN TRICK 💸 BANKEN SIND SAUER 💸💸💸 GIB EINFACH DEINE KONTONUMMER 💸 WAS KANN SCHON SCHIEFGEHEN 💸💸💸</span></div>
@@ -168,6 +175,58 @@
   </footer>
 
 <script>
+  // ===== GAMESHOW-MUSIK (komplett im Browser erzeugt, keine Datei) =====
+  let actx=null, musicOn=false, musicStarted=false, loopTimeout=null;
+  function ensureCtx(){
+    if(!actx) actx = new (window.AudioContext||window.webkitAudioContext)();
+    if(actx.state==='suspended') actx.resume();
+  }
+  // Halbton-Abstand von A4=440Hz
+  const S = {C4:-9,D4:-7,E4:-5,F4:-4,G4:-2,A4:0,B4:2,C5:3,D5:5,E5:7,F5:8,G5:10,A5:12,B5:14,C6:15};
+  function hz(semi){ return 440*Math.pow(2,semi/12); }
+  function tone(semi, start, dur, type, vol){
+    const o=actx.createOscillator(), g=actx.createGain();
+    o.type=type; o.frequency.value=hz(semi);
+    o.connect(g); g.connect(actx.destination);
+    g.gain.setValueAtTime(0.0001, start);
+    g.gain.linearRampToValueAtTime(vol, start+0.012);
+    g.gain.exponentialRampToValueAtTime(0.0008, start+dur*0.9);
+    o.start(start); o.stop(start+dur);
+  }
+  // Eingaengiges Gameshow-Riff [Note, Dauer in Beats]
+  const MELODY = [
+    ['G4',.5],['G4',.5],['C5',.5],['C5',.5],['E5',.5],['E5',.5],['C5',1],[null,.5],['G5',.5],
+    ['G4',.5],['G4',.5],['D5',.5],['D5',.5],['F5',.5],['F5',.5],['D5',1],[null,.5],['B4',.5],
+    ['C5',.5],['E5',.5],['G5',.5],['C6',.5],['B5',.5],['G5',.5],['E5',.5],['C5',.5],
+    ['D5',.5],['F5',.5],['A5',.5],['G5',.5],['F5',1],[null,1]
+  ];
+  function playLoop(){
+    if(!musicOn) return;
+    const beat=60/146, start=actx.currentTime+0.06;
+    let t=0;
+    for(const [n,d] of MELODY){
+      if(n!==null) tone(S[n], start+t*beat, d*beat, 'square', 0.14);
+      t+=d;
+    }
+    const total=t, roots=[-21,-21,-26,-24]; // C3 C3 G2 A2 Bass-Puls
+    for(let b=0;b<Math.ceil(total);b++)
+      tone(roots[Math.floor(b/2)%4], start+b*beat, beat*0.9, 'triangle', 0.18);
+    loopTimeout=setTimeout(playLoop, total*beat*1000);
+  }
+  function updateMusikBtn(){
+    document.getElementById('musikbtn').textContent = musicOn ? '🔊 Musik AUS' : '🎵 MUSIK AN!';
+  }
+  function toggleMusic(){
+    ensureCtx(); musicStarted=true; musicOn=!musicOn; updateMusikBtn();
+    if(musicOn) playLoop(); else clearTimeout(loopTimeout);
+  }
+  // "Tada!"-Fanfare beim Kassieren
+  function fanfare(){
+    ensureCtx();
+    const beat=0.11, start=actx.currentTime+0.02;
+    ['C5','E5','G5','C6','G5','C6'].forEach((n,i)=> tone(S[n], start+i*beat, beat*1.6, 'square', 0.2));
+  }
+
   // Fallende Dollarzeichen
   const symbole = ['💵','💰','🤑','💸','🪙','💲','€'];
   function regne(){
@@ -213,6 +272,9 @@
     const box = document.getElementById('ergebnis');
     box.textContent = sprueche[Math.floor(Math.random()*sprueche.length)];
     box.classList.add('show');
+    // Musik beim ersten Klick automatisch starten, dann "Tada"-Fanfare
+    if(!musicStarted){ musicStarted=true; musicOn=true; ensureCtx(); updateMusikBtn(); playLoop(); }
+    fanfare();
     // Konfetti-Burst aus Emojis
     for(let i=0;i<40;i++) setTimeout(regne, i*20);
     document.body.animate(
